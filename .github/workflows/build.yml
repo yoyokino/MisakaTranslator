@@ -3,7 +3,7 @@ on: [push]
 
 jobs:
   build:
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
     - uses: microsoft/setup-msbuild@v1
@@ -11,15 +11,12 @@ jobs:
     - uses: actions/upload-artifact@v2
       with:
         path: MisakaTranslator-WPF/bin
-  test:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Run Infer#      
-        uses: microsoft/infersharpaction@v1.4
-        id: runinfersharp
-        with:
-          binary-path: MisakaTranslator-WPF/bin
-      - name: Infer# analysis results
-        run: echo "${{ steps.runinfersharp.outputs.results }}"
+    - name: Run Infer#      
+      uses: microsoft/infersharpaction@v1.4
+      id: runinfersharp
+      with:
+        binary-path: MisakaTranslator-WPF/bin
+    - name: Infer# analysis results
+      run: echo "${{ steps.runinfersharp.outputs.results }}"
 
       
