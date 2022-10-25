@@ -3,13 +3,14 @@ name: .NET Core
 on: [push]
 
 jobs:
-  build:
+  test:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v1
-    - uses: microsoft/setup-msbuild@v1
-    - run: msbuild -v:m -r
-    - uses: actions/upload-artifact@v2
+    - name: Build with dotnet
+      run: dotnet build 
+    - name: Test with dotnet
+      run: dotnet test
     - name: Run Infer#      
       uses: microsoft/infersharpaction@v1.2
       with:
