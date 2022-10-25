@@ -4,24 +4,14 @@ on: [push]
 
 jobs:
   build:
-    runs-on: windows-latest
-    steps:
-    - uses: actions/checkout@v2
-    - uses: microsoft/setup-msbuild@v1
-    - run: msbuild -v:m -r
-    - uses: actions/upload-artifact@v2
-      with:
-        path: MisakaTranslator-WPF/bin
-        
-  TestOnLinux:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v1
-    - name: Build with dotnet
-      run: dotnet build --configuration Release -f netcoreapp3.1
-    - name: Test with dotnet
-      run: dotnet test --configuration Release  --no-build -f netcoreapp3.1
+    - uses: microsoft/setup-msbuild@v1
+    - run: msbuild -v:m -r
+    - uses: actions/upload-artifact@v2
     - name: Run Infer#      
       uses: microsoft/infersharpaction@v1.2
       with:
         binary-path: MisakaTranslator-WPF/bin
+
