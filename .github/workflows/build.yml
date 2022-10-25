@@ -14,3 +14,12 @@ jobs:
     - uses: actions/upload-artifact@v2
       with:
         path: MisakaTranslator-WPF/bin
+        
+  TestOnLinux:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - name: Run Infer#      
+      uses: microsoft/infersharpaction@v1.2
+      with:
+        binary-path: MisakaTranslator-WPF/bin
